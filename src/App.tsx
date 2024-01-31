@@ -1,5 +1,7 @@
+import SearchForm from "./components/SearchForm";
+
 function App() {
-  return <div>Hello world</div>;
+  return <SearchForm />;
 }
 
 export default App;
