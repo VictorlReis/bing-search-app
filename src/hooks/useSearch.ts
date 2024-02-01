@@ -7,8 +7,13 @@ const useSearch = () => {
   const [error, setError] = useState<null | string>("");
 
   const search = async (query: string) => {
-    setError(null);
+    if (!query || query === "") {
+      setLoading(false);
+      setSearchResults([]);
+      return { searchResults, loading, error, search };
+    }
     try {
+      setError(null);
       setLoading(true);
       const response = await axios.get(
         `https://api.bing.microsoft.com/v7.0/search?q=${query}`,
@@ -18,7 +23,6 @@ const useSearch = () => {
           },
         },
       );
-
       setSearchResults(response.data.webPages.value);
     } catch (error) {
       setError("Error fetching search results");
