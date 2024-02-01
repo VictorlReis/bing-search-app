@@ -43,7 +43,7 @@ const SearchForm = () => {
           {loading ? "Searching..." : "Search"}
         </Button>
       </div>
-      <div className="grid gap-6 max-w-4xl">
+      <div className="grid gap-6 max-w-4xl max-h-[70em] overflow-y-auto">
         {searchResults.map((result) => {
           return (
             <div key={result.id} className="p-2 rounded-lg hover:bg-zinc-50">
