@@ -8,7 +8,6 @@ const SearchForm = () => {
   const [query, setQuery] = useState("");
   const { searchResults, loading, error, search } = useSearch();
 
-  console.log(searchResults);
   const handleSearch = async () => {
     search(query);
   };
@@ -16,6 +15,12 @@ const SearchForm = () => {
   const clearSearch = () => {
     setQuery("");
     search("");
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
   };
 
   return (
@@ -32,6 +37,7 @@ const SearchForm = () => {
           className="w-96 p-4"
           onChange={(e) => setQuery(e.target.value)}
           disabled={loading}
+          onKeyPress={handleKeyPress}
         />
         <Button type="button" onClick={handleSearch}>
           {loading ? "Searching..." : "Search"}
