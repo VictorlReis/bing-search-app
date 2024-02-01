@@ -23,7 +23,7 @@ const SearchForm = () => {
       {" "}
       <div className="flex items-center space-x-4 mb-12">
         <Button variant="ghost" onClick={clearSearch}>
-          <BsBing />
+          <BsBing size={25} />
         </Button>
         <Input
           type="text"
@@ -43,7 +43,7 @@ const SearchForm = () => {
             <div key={result.id} className="p-2 rounded-lg hover:bg-zinc-50">
               <a
                 href={result.url}
-                className="bg-background hover:underline text-xl font-semibold"
+                className="bg-background hover:underline text-xl font-semibold text-blue-600"
               >
                 {result.name}
               </a>
