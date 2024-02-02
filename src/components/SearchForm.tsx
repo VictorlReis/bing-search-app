@@ -1,32 +1,33 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import useSearch from "@/hooks/useSearch";
 import { BsBing } from "react-icons/bs";
+import {SearchResult} from "@/types";
 
 const SearchForm = () => {
   const [query, setQuery] = useState("");
-  const { searchResults, loading, error, search } = useSearch();
+  const { searchResults, loading, search } = useSearch();
 
   const handleSearch = async () => {
-    search(query);
+    await search(query);
   };
 
-  const clearSearch = () => {
+  const clearSearch = async () => {
     setQuery("");
-    search("");
+     await search("");
   };
 
-  const handleKeyPress = (event) => {
+  const handleKeyPress = async (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      handleSearch();
+       await handleSearch();
     }
   };
 
   return (
-    <div className="flex flex-col bg-background text-foreground items-center justify-center h-screen">
+    <main className="flex flex-col bg-background text-foreground items-center justify-center h-screen">
       {" "}
-      <div className="flex items-center space-x-4 mb-12">
+      <section className="flex items-center space-x-4 mb-12">
         <Button variant="ghost" onClick={clearSearch}>
           <BsBing size={25} />
         </Button>
@@ -37,14 +38,14 @@ const SearchForm = () => {
           className="w-96 p-4"
           onChange={(e) => setQuery(e.target.value)}
           disabled={loading}
-          onKeyPress={handleKeyPress}
+          onKeyUp={handleKeyPress}
         />
         <Button type="button" onClick={handleSearch}>
           {loading ? "Searching..." : "Search"}
         </Button>
-      </div>
-      <div className="grid gap-6 max-w-4xl max-h-[70em] overflow-y-auto">
-        {searchResults.map((result) => {
+      </section>
+      <section className="grid gap-6 max-w-4xl max-h-[70em] overflow-y-auto">
+        {searchResults.map((result: SearchResult) => {
           return (
             <div key={result.id} className="p-2 rounded-lg hover:bg-zinc-50">
               <a
@@ -57,8 +58,8 @@ const SearchForm = () => {
             </div>
           );
         })}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 
