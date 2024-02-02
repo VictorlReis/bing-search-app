@@ -19,7 +19,7 @@ const useSearch = () => {
         `https://api.bing.microsoft.com/v7.0/search?q=${query}`,
         {
           headers: {
-            "Ocp-Apim-Subscription-Key": "",
+            "Ocp-Apim-Subscription-Key": import.meta.env.VITE_BING_API_KEY,
           },
         },
       );
